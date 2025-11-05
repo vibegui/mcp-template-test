@@ -1,0 +1,5 @@
+{
+  "name": "todo_items",
+  "createSql": "CREATE TABLE todo_items (\n  id TEXT PRIMARY KEY,\n  original_input TEXT NOT NULL,\n  description TEXT NOT NULL,\n  tags TEXT NOT NULL,\n  priority TEXT NOT NULL,\n  completed INTEGER NOT NULL DEFAULT 0,\n  created_at TEXT NOT NULL,\n  updated_at TEXT NOT NULL\n)",
+  "indexes": []
+}
