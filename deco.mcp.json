@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "project": {
-    "slug": "template-test",
-    "title": "template-test"
+    "slug": "mcp-template-test",
+    "title": "mcp-template-test"
   },
   "author": {
     "orgSlug": "vibegui"
