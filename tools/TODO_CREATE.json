@@ -1,0 +1,59 @@
+{
+  "name": "TODO_CREATE",
+  "description": "Create a new todo item in the database",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "original_input": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "priority": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      }
+    },
+    "required": [
+      "original_input",
+      "description",
+      "tags",
+      "priority"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "success": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "id",
+      "success"
+    ]
+  },
+  "execute": "export default async function(input, ctx) {\n  const { original_input, description, tags, priority } = input;\n  \n  // Generate UUID v4 using Math.random() (works in all environments)\n  function generateUUID() {\n    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n      const r = Math.random() * 16 | 0;\n      const v = c === 'x' ? r : (r & 0x3 | 0x8);\n      return v.toString(16);\n    });\n  }\n  \n  const id = generateUUID();\n  const now = new Date().toISOString();\n  const tagsJson = JSON.stringify(tags);\n  const sql = `INSERT INTO todo_items (id, original_input, description, tags, priority, completed, created_at, updated_at) VALUES (?, ?, ?, ?, ?, 0, ?, ?)`;\n  \n  console.log('[TODO_CREATE] Creating task:', { id, description, priority });\n  await ctx.env['i:databases-management'].DATABASES_RUN_SQL({\n    sql,\n    params: [id, original_input, description, tagsJson, priority, now, now]\n  });\n  \n  console.log('[TODO_CREATE] Task created successfully');\n  return { id, success: true };\n}",
+  "dependencies": [
+    {
+      "integrationId": "i:databases-management",
+      "toolNames": [
+        "DATABASES_RUN_SQL"
+      ]
+    }
+  ]
+}

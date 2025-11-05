@@ -1,0 +1,55 @@
+{
+  "name": "TODO_UPDATE",
+  "description": "Update a task's fields",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "completed": {
+        "type": "boolean"
+      },
+      "description": {
+        "type": "string"
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "priority": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ]
+      }
+    },
+    "required": [
+      "id"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "success": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "success"
+    ]
+  },
+  "execute": "export default async function(input, ctx) {\n  const { id, completed, description, tags, priority } = input;\n  const now = new Date().toISOString();\n  let updates = [];\n  let params = [];\n  if (completed !== undefined) { updates.push('completed = ?'); params.push(completed ? 1 : 0); }\n  if (description !== undefined) { updates.push('description = ?'); params.push(description); }\n  if (tags !== undefined) { updates.push('tags = ?'); params.push(JSON.stringify(tags)); }\n  if (priority !== undefined) { updates.push('priority = ?'); params.push(priority); }\n  updates.push('updated_at = ?');\n  params.push(now);\n  params.push(id);\n  const sql = `UPDATE todo_items SET ${updates.join(', ')} WHERE id = ?`;\n  \n  console.log('[TODO_UPDATE] Updating task:', id);\n  await ctx.env['i:databases-management'].DATABASES_RUN_SQL({\n    sql,\n    params\n  });\n  \n  console.log('[TODO_UPDATE] Task updated successfully');\n  return { success: true };\n}",
+  "dependencies": [
+    {
+      "integrationId": "i:databases-management",
+      "toolNames": [
+        "DATABASES_RUN_SQL"
+      ]
+    }
+  ]
+}

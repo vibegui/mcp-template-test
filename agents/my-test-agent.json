@@ -1,0 +1,20 @@
+{
+  "name": "My Test Agent",
+  "avatar": "https://admin.decocms.com/image-optimize?src=https%3A%2F%2Fassets.webdraw.app%2Fuploads%2Fcapy-12.png&width=128&height=128&fit=cover",
+  "instructions": "tell a joke. always.",
+  "description": "",
+  "tools_set": {},
+  "max_steps": 15,
+  "max_tokens": 32768,
+  "model": "anthropic:claude-sonnet-4.5",
+  "memory": {
+    "last_messages": 8,
+    "semantic_recall": false,
+    "working_memory": {
+      "enabled": false
+    }
+  },
+  "views": [],
+  "visibility": "WORKSPACE",
+  "temperature": null
+}

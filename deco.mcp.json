@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "project": {
+    "slug": "template-test",
+    "title": "template-test"
+  },
+  "author": {
+    "orgSlug": "vibegui"
+  },
+  "resources": {
+    "tools": [
+      "/tools/TODO_CREATE.json",
+      "/tools/TODO_UPDATE.json",
+      "/tools/TODO_DELETE.json",
+      "/tools/TODO_AI_ENHANCE.json",
+      "/tools/FETCH_TODOS.json"
+    ],
+    "views": [
+      "/views/todo_list_view.json"
+    ],
+    "workflows": [],
+    "documents": [
+      "/documents/Untitled-2025-11-05T12-15-01-812Z.json"
+    ]
+  },
+  "dependencies": {
+    "mcps": []
+  },
+  "createdAt": "2025-11-05T17:53:12.903Z"
+}

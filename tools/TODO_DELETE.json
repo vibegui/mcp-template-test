@@ -1,0 +1,39 @@
+{
+  "name": "TODO_DELETE",
+  "description": "Delete a task",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "id"
+    ]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "success": {
+        "type": "boolean"
+      },
+      "id": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "success",
+      "id"
+    ]
+  },
+  "execute": "export default async function(input, ctx) {\n  const { id } = input;\n  const sql = `DELETE FROM todo_items WHERE id = ?`;\n  \n  console.log('[TODO_DELETE] Deleting task:', id);\n  await ctx.env['i:databases-management'].DATABASES_RUN_SQL({\n    sql,\n    params: [id]\n  });\n  \n  console.log('[TODO_DELETE] Task deleted successfully');\n  return { success: true, id };\n}",
+  "dependencies": [
+    {
+      "integrationId": "i:databases-management",
+      "toolNames": [
+        "DATABASES_RUN_SQL"
+      ]
+    }
+  ]
+}
