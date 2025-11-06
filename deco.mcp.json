@@ -11,16 +11,16 @@
     "tools": [
       "/tools/TODO_CREATE.json",
       "/tools/TODO_DELETE.json",
-      "/tools/FETCH_TODOS.json",
       "/tools/TODO_UPDATE.json",
-      "/tools/TODO_AI_ENHANCE.json"
+      "/tools/TODO_AI_ENHANCE.json",
+      "/tools/FETCH_TODOS.json"
     ],
     "views": [
       "/views/todo_list_view.json"
     ],
     "workflows": [],
     "documents": [
-      "/documents/Untitled-2025-11-05T12-15-01-812Z.json"
+      "/spec.json"
     ],
     "database": [
       "/database/todo_items.json"
@@ -29,5 +29,5 @@
   "dependencies": {
     "mcps": []
   },
-  "createdAt": "2025-11-06T00:55:49.273Z"
+  "createdAt": "2025-11-06T01:34:43.963Z"
 }
